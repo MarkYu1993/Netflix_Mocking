@@ -34,6 +34,8 @@ class HomeViewController: UIViewController {
                                                         width: view.bounds.width,
                                                         height: 450))
         homeFeedTable.tableHeaderView = headerView
+        
+        getTrendingMovies()
     }
     
     override func viewDidLayoutSubviews() {
@@ -64,9 +66,18 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .white
         
     }
-    @objc func netflixButtonTapped(){
-        print("Netflix is nice!!")
+    
+    private func getTrendingMovies(){
+        APICaller.shared.getTrendingMovies { results in
+            switch results {
+            case .success(let movies):
+                print(movies)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
+
     
 }
 
@@ -96,6 +107,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return 40
     }
     
+    //設定每個Section的HeaderView裡的文字 顏色 位置
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else { return }
         header.textLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
@@ -107,6 +119,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         header.textLabel?.text = header.textLabel!.text?.lowercased()
     }
     
+    //每一個Section的Header的title
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sectionTitles[section]
     }
