@@ -10,6 +10,7 @@ import UIKit
 class HomeViewController: UIViewController {
 
     private let homeFeedTable: UITableView = {
+        //style是樣式
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(CollectionViewTableViewCell.self, forCellReuseIdentifier: CollectionViewTableViewCell.identifier)
         return table
@@ -23,6 +24,8 @@ class HomeViewController: UIViewController {
         homeFeedTable.delegate = self
         homeFeedTable.dataSource = self
         
+        configureNavBar()
+        
         let headerView = HeroHeaderUIView(frame: CGRect(x: 0,
                                                         y: 0,
                                                         width: view.bounds.width,
@@ -33,6 +36,32 @@ class HomeViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         homeFeedTable.frame = view.bounds
+    }
+    
+    private func configureNavBar() {
+        var image = UIImage(named: "netflixLogo")
+
+        image = image?.withRenderingMode(.alwaysOriginal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image,
+                                                           style: .done,
+                                                           target: self,
+                                                           action: nil)
+
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(image: UIImage(systemName: "person"),
+                            style: .done,
+                            target: self,
+                            action: nil),
+            UIBarButtonItem(image: UIImage(systemName: "play.rectangle"),
+                            style: .done,
+                            target: self,
+                            action: nil)
+        ]
+        navigationController?.navigationBar.tintColor = .white
+        
+    }
+    @objc func netflixButtonTapped(){
+        print("Netflix is nice!!")
     }
     
 }
@@ -58,7 +87,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return 200
     }
     
+    //因header已放view進去 所以這邊設定的值就沒用了
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let defaultOffset = view.safeAreaInsets.top
+        let offset = scrollView.contentOffset.y + defaultOffset
+        
+        navigationController?.navigationBar.transform = .init(translationX: 0,
+                                                              y: min(0, -offset))
     }
 }
