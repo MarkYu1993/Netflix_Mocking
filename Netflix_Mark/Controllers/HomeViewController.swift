@@ -10,7 +10,11 @@ import UIKit
 class HomeViewController: UIViewController {
 
     
-    let sectionTitles: [String] = ["Trending Movies", "Popular", "Trending TV", "Upcoming Movies", "Top Rated"]
+    let sectionTitles: [String] = ["Trending Movies",
+                                   "Trending TV",
+                                   "Popular",
+                                   "Upcoming Movies",
+                                   "Top Rated"]
     
     private let homeFeedTable: UITableView = {
         //style是樣式
@@ -35,7 +39,7 @@ class HomeViewController: UIViewController {
                                                         height: 450))
         homeFeedTable.tableHeaderView = headerView
         
-        getTrendingMovies()
+        fetchData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -67,14 +71,17 @@ class HomeViewController: UIViewController {
         
     }
     
-    private func getTrendingMovies(){
-        APICaller.shared.getTrendingMovies { results in
-            switch results {
-            case .success(let movies):
-                print(movies)
-            case .failure(let error):
-                print(error)
-            }
+    private func fetchData(){
+//        APICaller.shared.getTrendingMovies { results in
+//            switch results {
+//            case .success(let movies):
+//                print(movies)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+        APICaller.shared.getTopRatedMovies { result in
+             
         }
     }
 
@@ -116,7 +123,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                                          width: 100,
                                          height: header.bounds.height)
         header.textLabel?.textColor = .white
-        header.textLabel?.text = header.textLabel!.text?.lowercased()
+        //設定每一列的header 第一個字母大寫以外其他小寫(利用extension)
+        header.textLabel?.text = header.textLabel!.text?.capitalizeFirstLetter()
     }
     
     //每一個Section的Header的title
