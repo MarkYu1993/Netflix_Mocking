@@ -20,6 +20,7 @@
 		040C212227C52B6A00520914 /* HeroHeaderUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040C212127C52B6A00520914 /* HeroHeaderUIView.swift */; };
 		043A011C27C686A10017C115 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043A011B27C686A10017C115 /* APICaller.swift */; };
 		043A011E27C6899D0017C115 /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043A011D27C6899D0017C115 /* Title.swift */; };
+		0475488E27CE1943005078B1 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0475488D27CE1943005078B1 /* SearchResultsViewController.swift */; };
 		04AF952427C91045006AC47C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AF952327C91045006AC47C /* Extensions.swift */; };
 		04AF952827C91D3E006AC47C /* TitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AF952727C91D3E006AC47C /* TitleCollectionViewCell.swift */; };
 		04AF952B27C91F06006AC47C /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 04AF952A27C91F06006AC47C /* SDWebImage */; };
@@ -44,6 +45,7 @@
 		040C212127C52B6A00520914 /* HeroHeaderUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroHeaderUIView.swift; sourceTree = "<group>"; };
 		043A011B27C686A10017C115 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		043A011D27C6899D0017C115 /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
+		0475488D27CE1943005078B1 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		04AF952327C91045006AC47C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		04AF952727C91D3E006AC47C /* TitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewCell.swift; sourceTree = "<group>"; };
 		04AF952E27C93411006AC47C /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
@@ -101,10 +103,8 @@
 		040C211027C51EA900520914 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				040C211127C51EBF00520914 /* HomeViewController.swift */,
-				040C211327C51EDF00520914 /* UpcomingViewController.swift */,
-				040C211527C51EF400520914 /* SearchViewController.swift */,
-				040C211727C51F1100520914 /* DownloadsViewController.swift */,
+				0475489027CE1976005078B1 /* General */,
+				0475488F27CE1968005078B1 /* Core */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -150,6 +150,25 @@
 				043A011B27C686A10017C115 /* APICaller.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		0475488F27CE1968005078B1 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				040C211127C51EBF00520914 /* HomeViewController.swift */,
+				040C211327C51EDF00520914 /* UpcomingViewController.swift */,
+				040C211527C51EF400520914 /* SearchViewController.swift */,
+				040C211727C51F1100520914 /* DownloadsViewController.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		0475489027CE1976005078B1 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				0475488D27CE1943005078B1 /* SearchResultsViewController.swift */,
+			);
+			path = General;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +257,7 @@
 				040C212227C52B6A00520914 /* HeroHeaderUIView.swift in Sources */,
 				040C211827C51F1100520914 /* DownloadsViewController.swift in Sources */,
 				040C20FD27C51C9500520914 /* AppDelegate.swift in Sources */,
+				0475488E27CE1943005078B1 /* SearchResultsViewController.swift in Sources */,
 				04AF952427C91045006AC47C /* Extensions.swift in Sources */,
 				040C20FF27C51C9500520914 /* SceneDelegate.swift in Sources */,
 				040C211427C51EDF00520914 /* UpcomingViewController.swift in Sources */,
