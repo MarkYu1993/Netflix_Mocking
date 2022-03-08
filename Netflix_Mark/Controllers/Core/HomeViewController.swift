@@ -47,7 +47,7 @@ class HomeViewController: UIViewController {
                                                         height: 450))
         homeFeedTable.tableHeaderView = headerView
         
-        APICaller.shared.getMovie(with: "Harry potter")
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -98,6 +98,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.identifier, for: indexPath) as? CollectionViewTableViewCell else {
             return UITableViewCell()
         }
+        
+        cell.delegate = self
         
         //拆解開 各別設定
         switch indexPath.section {
@@ -190,4 +192,18 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         navigationController?.navigationBar.transform = .init(translationX: 0,
                                                               y: min(0, -offset))
     }
+}
+
+extension HomeViewController: CollectionViewTableViewCellDelegate {
+    func CollectionViewTableViewCellDidTapCell(_ cell: CollectionViewTableViewCell, viewModel: TitlePreviewViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            let vc = TitlePreviewViewController()
+            vc.configure(with: viewModel)
+            self?.navigationController?.pushViewController(vc, animated: true)
+
+        }
+
+    }
+    
+    
 }
