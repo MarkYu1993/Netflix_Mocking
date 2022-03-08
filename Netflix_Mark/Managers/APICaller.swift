@@ -11,6 +11,8 @@ struct Constants {
     //from TMDB Website
     static let API_KEY = "e7ca57eed4b0ad3379538fd7e0b4d724"
     static let baseURL = "https://api.themoviedb.org"
+    static let YoutubeAPI_KEY = "AIzaSyAu8u5u_24Vi0lAkNKPkPFjoQDnhaffhe4"
+    static let YoutubeBaseURL = "https://youtube.googleapis.com/youtube/v3/search?"
 }
 
 enum APIError: Error {
@@ -117,7 +119,7 @@ class APICaller {
     func search(with query: String, completion: @escaping (Result<[TrendingTitleResponse.Title], Error>) -> Void){
         
         //formatting url
-        guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {return}
+        guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
         
         guard let url = URL(string: "\(Constants.baseURL)/3/search/movie?api_key=\(Constants.API_KEY)&query=\(query)") else {return}
         
@@ -130,6 +132,27 @@ class APICaller {
                 completion(.success(results.results))
             } catch {
                 completion(.failure(APIError.failedToGetData))
+            }
+        }
+        task.resume()
+    }
+    
+    func getMovie(with query: String){
+        
+        guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {return}
+        guard let url = URL(string: "\(Constants.YoutubeBaseURL)q=\(query)&key=\(Constants.YoutubeAPI_KEY)") else {return}
+        
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            do {
+                let results = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+//                dump(results)
+                print(results)
+                
+            } catch {
+                print(error.localizedDescription)
             }
         }
         task.resume()

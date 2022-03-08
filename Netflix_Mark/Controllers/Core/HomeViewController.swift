@@ -47,6 +47,7 @@ class HomeViewController: UIViewController {
                                                         height: 450))
         homeFeedTable.tableHeaderView = headerView
         
+        APICaller.shared.getMovie(with: "Harry potter")
     }
     
     override func viewDidLayoutSubviews() {
