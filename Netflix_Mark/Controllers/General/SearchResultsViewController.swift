@@ -9,9 +9,10 @@ import UIKit
 
 class SearchResultsViewController: UIViewController {
     
-    private var titles: [TrendingTitleResponse.Title] = [TrendingTitleResponse.Title]()
+    // public 供SearchVC取用
+    public var titles: [TrendingTitleResponse.Title] = [TrendingTitleResponse.Title]()
     
-    private let searchResultsCollectionView: UICollectionView = {
+    public let searchResultsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: UIScreen.main.bounds.width/3 - 10, height: 200)
         //最小間距
@@ -40,14 +41,17 @@ class SearchResultsViewController: UIViewController {
 
 extension SearchResultsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return titles.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TitleCollectionViewCell.identifier, for: indexPath) as? TitleCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.backgroundColor = .blue
+        
+        let title = titles[indexPath.row]
+        cell.configure(with: title.poster_path ?? "")
+        
         return cell
     }
 }
