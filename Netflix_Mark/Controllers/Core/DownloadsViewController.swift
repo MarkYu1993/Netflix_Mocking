@@ -2,7 +2,7 @@
 //  DownloadsViewController.swift
 //  Netflix_Mark
 //
-//  Created by EMCT on 2022/2/22.
+//  Created by MarkYu on 2022/2/22.
 //
 
 import UIKit
@@ -82,7 +82,6 @@ extension DownloadsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
         case .delete:
-
             //UI刪除之外 也要刪除database
             DataPersistenceManager.shared.deleteTitleWith(model: titles[indexPath.row]) { [weak self]result in
                 switch result {
@@ -92,8 +91,9 @@ extension DownloadsViewController: UITableViewDelegate, UITableViewDataSource {
                     print(error.localizedDescription)
                 }
                 //刪除順序很重要 or will crash
-                tableView.deleteRows(at: [indexPath], with: .fade)
                 self?.titles.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+
             }
         default:
             break

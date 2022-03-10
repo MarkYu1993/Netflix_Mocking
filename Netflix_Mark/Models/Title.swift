@@ -2,7 +2,7 @@
 //  Movie.swift
 //  Netflix_Mark
 //
-//  Created by EMCT on 2022/2/23.
+//  Created by MarkYu on 2022/2/23.
 //
 
 import Foundation

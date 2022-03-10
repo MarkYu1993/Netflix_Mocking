@@ -2,7 +2,7 @@
 //  TitlePreviewViewModel.swift
 //  Netflix_Mark
 //
-//  Created by EMCT on 2022/3/8.
+//  Created by MarkYu on 2022/3/8.
 //
 
 import Foundation
